@@ -5,6 +5,16 @@ import random
 app = Flask(__name__)
 CORS(app)   # allow frontend requests
 
+
+# Home route (prevents 404 on Render root URL)
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "message": "ScratchPay Backend Running 🚀"
+    })
+
+
+# Scratch reward generator API
 @app.route("/generate", methods=["POST"])
 def generate():
 
@@ -23,5 +33,13 @@ def generate():
     })
 
 
+# Health check route (optional but good for deployment)
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({
+        "status": "Server is healthy"
+    })
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
