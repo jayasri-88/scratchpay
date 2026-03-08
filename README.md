@@ -186,7 +186,7 @@ This project helps developers understand:
 
 ## Author
 
-**Sri**  
+**JayaSri**  
 B.Tech – Information Technology  
 MVGR College of Engineering
 
