@@ -83,7 +83,7 @@ scratchpay
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/scratchpay.git
+git clone https://github.com/jayasri-88/scratchpay.git
 cd scratchpay
 ```
 
