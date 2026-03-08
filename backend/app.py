@@ -1,23 +1,22 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 import random
+import os
 
-app = Flask(__name__)
-CORS(app)   # allow frontend requests
+# set frontend folder path
+app = Flask(__name__, static_folder="../frontend", static_url_path="")
+CORS(app)
 
 
-# Home route (prevents 404 on Render root URL)
-@app.route("/", methods=["GET"])
-def home():
-    return jsonify({
-        "message": "ScratchPay Backend Running 🚀"
-    })
+# Serve the frontend app
+@app.route("/")
+def index():
+    return send_from_directory(app.static_folder, "index.html")
 
 
 # Scratch reward generator API
 @app.route("/generate", methods=["POST"])
 def generate():
-
     rewards = [
         "₹10 Cashback",
         "₹20 Cashback",
@@ -30,14 +29,6 @@ def generate():
 
     return jsonify({
         "reward": reward
-    })
-
-
-# Health check route (optional but good for deployment)
-@app.route("/health", methods=["GET"])
-def health():
-    return jsonify({
-        "status": "Server is healthy"
     })
 
 
