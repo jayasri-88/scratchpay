@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Withdraw - ScratchPay</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Segoe UI;
+}
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 380px;
+}
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+button:hover {
+    background: #218838;
+}
+.back-btn {
+    margin-top: 15px;
+    background: #667eea;
+}
+.back-btn:hover {
+    background: #5563d1;
+}
+#message {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #28a745;
+    display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Withdraw Funds</h1>
+    
+    <div class="form-group">
+        <label>UPI ID or Bank Account</label>
+        <input type="text" id="upi_id" placeholder="e.g., user@upi">
+    </div>
+    
+    <div class="form-group">
+        <label>Reward</label>
+        <input type="text" id="amount" placeholder="Loading..." readonly style="background-color: #eaeaea; cursor: not-allowed; color: #555;">
+    </div>
+    
+    <button onclick="processWithdrawal()">Process Withdrawal</button>
+    <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
+    
+    <div id="message">Withdrawal requested successfully!</div>
+</div>
+
+<script>
+window.onload = function() {
+    var params = new URLSearchParams(window.location.search);
+    var reward = params.get("reward");
+    if(reward) {
+        document.getElementById("amount").value = reward;
+    } else {
+        document.getElementById("amount").value = "No reward found";
+    }
+}
+
+function processWithdrawal() {
+    var upi = document.getElementById("upi_id").value;
+    var amount = document.getElementById("amount").value;
+    
+    if(!upi || !amount || amount === "No reward found" || amount === "Better Luck Next Time") {
+        alert("Please enter a valid UPI ID and ensure you have a valid reward!");
+        return;
+    }
+    
+    document.getElementById("message").style.display = "block";
+    setTimeout(() => {
+        document.getElementById("message").style.display = "none";
+        document.getElementById("upi_id").value = "";
+    }, 3000);
+}
+</script>
+
+</body>
+</html>

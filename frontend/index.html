@@ -96,7 +96,10 @@ background:#5563d1;
 
 </div>
 
-<button onclick="generateCard()">Generate Scratch Card</button>
+<div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+<button onclick="generateCard()" style="margin-top: 0;">Generate Scratch Card</button>
+<button onclick="goToWithdraw()" style="margin-top: 0; background: #28a745;">Withdraw</button>
+</div>
 
 </div>
 
@@ -146,6 +149,15 @@ ctx.fill()
 }
 
 })
+
+function goToWithdraw() {
+    var rewardText = document.getElementById("reward").innerText;
+    if (rewardText === "Generate Card" || rewardText === "") {
+        alert("Please generate a scratch card first!");
+        return;
+    }
+    window.location.href = 'withdraw.html?reward=' + encodeURIComponent(rewardText);
+}
 
 </script>
 
